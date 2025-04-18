@@ -1,16 +1,13 @@
-import streamDeck, {
+import {
   action,
   DidReceiveSettingsEvent,
   KeyAction,
   KeyDownEvent,
-  LogLevel,
   SingletonAction,
   WillAppearEvent,
   WillDisappearEvent,
 } from '@elgato/streamdeck';
 import { Matrix } from '../matrix';
-
-streamDeck.logger.setLevel(LogLevel.WARN);
 
 type Settings = {
   animationSpeed: number;
