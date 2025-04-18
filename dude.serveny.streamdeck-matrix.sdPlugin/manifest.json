@@ -43,5 +43,13 @@
 		"Version": "20",
 		"Debug": "enabled"
 	},
+	"Profiles": [
+		{
+			"Name": "profiles/matrix",
+			"DeviceType": 0,
+			"Readonly": false,
+			"DontAutoSwitchWhenInstalled": false
+		}
+	],
 	"UUID": "dude.serveny.streamdeck-matrix"
 }
