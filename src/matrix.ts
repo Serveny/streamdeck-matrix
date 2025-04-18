@@ -1,17 +1,11 @@
 import { KeyAction } from '@elgato/streamdeck';
 import { randomIntBetween, rndBool } from './utils';
 
-export class Tile {
-  timeout: NodeJS.Timeout | null = null;
-
-  constructor(public action: KeyAction) {}
-}
-
 export class Matrix {
   // x/y or col/row
   private tiles: (Tile | null)[][] = [];
 
-  private animation = new MatrixAnimation(this.tiles, 0.9);
+  public animation = new MatrixAnimation(this.tiles, 0.9);
 
   addTile(rowI: number, colI: number, action: KeyAction) {
     const lastColI = this.tiles.length - 1;
@@ -33,16 +27,19 @@ export class Matrix {
     return this.tiles[colI][rowI];
   }
 
+  showTileKeypressAnimation(rowI: number, colI: number) {
+    const tile = this.getTile(rowI, colI);
+    if (tile == null) return;
+    tile.action.setImage('imgs/actions/tile/bright_green');
+    if (tile.pressTimeout) clearTimeout(tile.pressTimeout);
+    tile.pressTimeout = setTimeout(() => {
+      tile.pressTimeout = null;
+      tile.action.setImage('imgs/actions/tile/black');
+    }, 300);
+  }
+
   removeTile(rowI: number, colI: number) {
     this.tiles[rowI][colI] = null;
-  }
-
-  startAnimation() {
-    this.animation.start();
-  }
-
-  stopAnimation() {
-    this.animation.stop();
   }
 
   isEmpty() {
@@ -50,20 +47,37 @@ export class Matrix {
   }
 }
 
+class Tile {
+  pressTimeout: NodeJS.Timeout | null = null;
+
+  constructor(public action: KeyAction) {}
+}
+
 class MatrixAnimation {
   private timeout: NodeJS.Timeout | null = null;
   private animatedCols: (MatrixColumnAnimation | null)[] = [];
-  constructor(private tiles: (Tile | null)[][], public spawnRate: number) {}
+  constructor(
+    private tiles: (Tile | null)[][],
+    public spawnRate: number = 0.5
+  ) {}
   addCol() {
     this.animatedCols.push(null);
   }
 
   start() {
-    this.timeout = setTimeout(() => this.animateFrame(), 2000);
+    if (this.timeout == null)
+      this.timeout = setTimeout(() => this.animateFrame(), 2000);
   }
 
   stop() {
-    if (this.timeout) clearTimeout(this.timeout);
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+      this.timeout = null;
+    }
+  }
+
+  setSpawnRate(spawnRate: number = 0.5) {
+    this.spawnRate = spawnRate;
   }
 
   private async animateFrame() {

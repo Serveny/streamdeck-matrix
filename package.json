@@ -1,8 +1,8 @@
 {
     "scripts": {
         "build": "rollup -c",
-        "watch": "rollup -c -w --watch.onEnd=\"streamdeck restart com.serveny.streamdeck-matrix\"",
-        "restart": "streamdeck restart com.serveny.streamdeck-matrix.increment"
+        "watch": "rollup -c -w --watch.onEnd=\"streamdeck restart dude.serveny.streamdeck-matrix\"",
+        "restart": "streamdeck restart dude.serveny.streamdeck-matrix.increment"
     },
     "type": "module",
     "devDependencies": {
