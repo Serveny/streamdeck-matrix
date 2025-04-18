@@ -54,11 +54,12 @@ class Tile {
 }
 
 class MatrixAnimation {
+  private waitTimeMs: number = 300;
   private timeout: NodeJS.Timeout | null = null;
   private animatedCols: (MatrixColumnAnimation | null)[] = [];
   constructor(
     private tiles: (Tile | null)[][],
-    public spawnRate: number = 0.5
+    public spawnRate: number = 1.0
   ) {}
   addCol() {
     this.animatedCols.push(null);
@@ -76,14 +77,21 @@ class MatrixAnimation {
     }
   }
 
-  setSpawnRate(spawnRate: number = 0.5) {
+  setSpawnRate(spawnRate: number = 1.0) {
     this.spawnRate = spawnRate;
+  }
+
+  setSpeed(speed: number = 0.8) {
+    this.stop();
+    if (speed === 0) return;
+    this.waitTimeMs = Math.floor(1000 * (1.05 - speed));
+    this.animateFrame();
   }
 
   private async animateFrame() {
     this.chooseNextColAnimation();
     await this.animateCurrentCols();
-    this.timeout = setTimeout(() => this.animateFrame(), 300);
+    this.timeout = setTimeout(() => this.animateFrame(), this.waitTimeMs);
   }
 
   private chooseNextColAnimation() {

@@ -9,6 +9,7 @@ import streamDeck, {
 } from '@elgato/streamdeck';
 import { Matrix } from '../matrix';
 type Settings = {
+  animationSpeed: number;
   animationSpawnRate: number;
 };
 
@@ -36,8 +37,8 @@ export class MatrixTile extends SingletonAction<Settings> {
   override async onDidReceiveSettings(
     ev: DidReceiveSettingsEvent<Settings>
   ): Promise<void> {
-    const settings = await ev.action.getSettings();
-    streamDeck.logger.info(settings);
-    this.matrix.animation.setSpawnRate(settings.animationSpawnRate);
+    const { animationSpeed, animationSpawnRate } = ev.payload.settings;
+    this.matrix.animation.setSpeed(animationSpeed);
+    this.matrix.animation.setSpawnRate(animationSpawnRate);
   }
 }
