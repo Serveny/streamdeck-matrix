@@ -31,7 +31,7 @@ export class MatrixTile extends SingletonAction<Settings> {
 
   override async onKeyDown(ev: KeyDownEvent): Promise<void> {
     const { row, column } = (ev.payload as any).coordinates;
-    this.matrix.showTileKeypressAnimation(row, column);
+    this.matrix.onTilePressed(row, column);
   }
 
   override async onDidReceiveSettings(

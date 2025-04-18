@@ -5,7 +5,8 @@ export class Matrix {
   // x/y or col/row
   private tiles: (Tile | null)[][] = [];
 
-  public animation = new MatrixAnimation(this.tiles, 0.9);
+  private game = new MatrixGame();
+  public animation = new MatrixAnimation(this.tiles, this.game, 0.9);
 
   addTile(rowI: number, colI: number, action: KeyAction) {
     const lastColI = this.tiles.length - 1;
@@ -27,15 +28,13 @@ export class Matrix {
     return this.tiles[colI][rowI];
   }
 
-  showTileKeypressAnimation(rowI: number, colI: number) {
+  onTilePressed(rowI: number, colI: number) {
     const tile = this.getTile(rowI, colI);
     if (tile == null) return;
-    tile.action.setImage('imgs/actions/tile/bright_green');
-    if (tile.pressTimeout) clearTimeout(tile.pressTimeout);
-    tile.pressTimeout = setTimeout(() => {
-      tile.pressTimeout = null;
-      tile.action.setImage('imgs/actions/tile/black');
-    }, 300);
+    if (this.animation.isTileActive(rowI, colI)) {
+      this.animation.clearColAnimation(colI);
+      tile.showPressAnimation(this.game.up().toString());
+    }
   }
 
   removeTile(rowI: number, colI: number) {
@@ -48,9 +47,22 @@ export class Matrix {
 }
 
 class Tile {
-  pressTimeout: NodeJS.Timeout | null = null;
+  private pressTimeout: NodeJS.Timeout | null = null;
 
   constructor(public action: KeyAction) {}
+
+  showPressAnimation(text?: string) {
+    this.action.setImage('imgs/actions/tile/bright_green');
+    if (text) this.action.setTitle(text);
+    if (this.pressTimeout) clearTimeout(this.pressTimeout);
+    this.pressTimeout = setTimeout(() => this.clearPressAnimation(), 300);
+  }
+
+  private clearPressAnimation() {
+    this.pressTimeout = null;
+    this.action.setImage('imgs/actions/tile/black');
+    this.action.setTitle();
+  }
 }
 
 class MatrixAnimation {
@@ -59,6 +71,7 @@ class MatrixAnimation {
   private animatedCols: (MatrixColumnAnimation | null)[] = [];
   constructor(
     private tiles: (Tile | null)[][],
+    private game: MatrixGame,
     public spawnRate: number = 1.0
   ) {}
   addCol() {
@@ -88,6 +101,17 @@ class MatrixAnimation {
     this.animateFrame();
   }
 
+  isTileActive(rowI: number, colI: number): boolean {
+    return this.animatedCols[colI]?.isTileActive(rowI) ?? false;
+  }
+
+  clearColAnimation(colI: number) {
+    if (colI < this.animatedCols.length) {
+      this.animatedCols[colI]?.clear();
+      this.animatedCols[colI] = null;
+    }
+  }
+
   private async animateFrame() {
     this.chooseNextColAnimation();
     await this.animateCurrentCols();
@@ -108,23 +132,49 @@ class MatrixAnimation {
       if (
         this.animatedCols[i] != null &&
         (await this.animatedCols[i]?.animateNext())
-      )
+      ) {
         this.animatedCols[i] = null;
+        this.game.reset();
+      }
   }
 }
 
+type Color = 'black' | 'green';
+
 class MatrixColumnAnimation {
-  private rowI = 0;
+  private nextRowI = 0;
   constructor(private col: (Tile | null)[]) {
     col ??= [];
   }
 
   // Returns: isEndReached
   async animateNext(): Promise<boolean> {
-    if (this.rowI > 0)
-      await this.col[this.rowI - 1]?.action.setImage('imgs/actions/tile/black');
-    if (this.rowI < this.col.length)
-      await this.col[this.rowI]?.action.setImage('imgs/actions/tile/green');
-    return !(this.rowI++ < this.col.length);
+    if (this.nextRowI > 0) await this.clear();
+    if (this.nextRowI < this.col.length)
+      await this.setTileColor(this.nextRowI, 'green');
+    return !(this.nextRowI++ < this.col.length);
+  }
+
+  isTileActive(rowI: number): boolean {
+    return this.nextRowI - 1 === rowI;
+  }
+
+  async clear(): Promise<void> {
+    await this.setTileColor(this.nextRowI - 1, 'black');
+  }
+
+  private setTileColor(rowI: number, color: Color): Promise<void> | undefined {
+    return this.col[rowI]?.action.setImage(`imgs/actions/tile/${color}`);
+  }
+}
+
+class MatrixGame {
+  private counter = 0;
+
+  public up() {
+    return ++this.counter;
+  }
+  public reset() {
+    this.counter = 0;
   }
 }
