@@ -2,7 +2,7 @@
 
 A Streamdeck plugin for a matrix code rain inspired animation with a little mini game. Tap the green tile before they reach the ground to count up a highscore.
 
-[Demo](assets/demo.mp4)
+<img src="assets/demo.gif" alt="Menu demo animation" height="300px" align="center">
 
 ## How to use
 
@@ -10,7 +10,7 @@ Add a tile from the menu using drag & drop and the animation starts. It does not
 
 _For example, between a shutdown menu:_
 
-<img src="assets/menu-demo-animation.gif" alt="Menu demo animation">
+<img src="assets/menu-demo-animation.gif" alt="Menu demo animation" height="300px" align="center">
 
 ## Settings
 
