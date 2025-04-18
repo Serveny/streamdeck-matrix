@@ -30,7 +30,7 @@ export class MatrixTile extends SingletonAction<Settings> {
   override onWillDisappear(ev: WillDisappearEvent): Promise<void> | void {
     const { row, column } = (ev.payload as any).coordinates;
     this.matrix.removeTile(row, column);
-    if (!this.matrix.isEmpty()) this.matrix.animation.stop();
+    if (this.matrix.isEmpty()) this.matrix.animation.stop();
   }
 
   override async onKeyDown(ev: KeyDownEvent): Promise<void> {
