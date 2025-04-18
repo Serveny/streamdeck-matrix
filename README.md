@@ -1,0 +1,21 @@
+<h1 style="font-size: 32px;"><img src="dude.serveny.streamdeck-matrix.sdPlugin/imgs/plugin/category-icon.png" alt="Logo" width="32" height="32" style="margin-bottom: -6px;"> Streamdeck Matrix Plugin</h1>
+
+A Streamdeck plugin for a matrix code rain inspired animation with a little mini game. Tap the green tile before they reach the ground to count up a highscore.
+
+<video src='assets/demo.mp4' width="100%" />
+
+## How to use
+
+Add a tile from the menu using drag & drop and the animation starts. It does not matter whether the field is completely covered with tiles. There can also be cells from other plugins between the matrix tiles.
+
+_For example, between a shutdown menu:_
+
+<img src="assets/menu-demo-animation.gif" alt="Menu demo animation" width="100%">
+
+## Settings
+
+<table>
+  <tr><th>Name</th><th>Description</th></tr>
+  <tr><td>Speed</td><td>The animation speed. Controls how quickly the tiles move from top to bottom and new cells are spawned</td></tr>
+  <tr><td>Spawn Rate</td><td>The probability that a new rain drowp is spawned per animation step</td></tr>
+</table>
