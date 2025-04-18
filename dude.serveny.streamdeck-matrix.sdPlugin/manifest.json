@@ -8,7 +8,7 @@
 			"UUID": "dude.serveny.streamdeck-matrix.tile",
 			"Icon": "imgs/actions/counter/icon",
 			"Tooltip": "Displays a matrix tile",
-			"PropertyInspectorPath": "ui/increment-counter.html",
+			"PropertyInspectorPath": "ui/matrix-settings.html",
 			"Controllers": [
 				"Keypad"
 			],
