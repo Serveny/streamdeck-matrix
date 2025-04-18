@@ -6,7 +6,7 @@
 		{
 			"Name": "Tile",
 			"UUID": "dude.serveny.streamdeck-matrix.tile",
-			"Icon": "imgs/actions/counter/icon",
+			"Icon": "imgs/actions/tile/icon",
 			"Tooltip": "Displays a matrix tile",
 			"PropertyInspectorPath": "ui/matrix-settings.html",
 			"Controllers": [
