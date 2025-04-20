@@ -44,7 +44,17 @@ export class Matrix {
   isEmpty() {
     return !this.tiles.some((col) => col.some((item) => item != null));
   }
+
+  updateSettings(settings: MatrixSettings) {
+    this.animation.setSpeed(settings.animationSpeed);
+    this.animation.setSpawnRate(settings.animationSpawnRate);
+  }
 }
+
+export type MatrixSettings = {
+  animationSpeed: number;
+  animationSpawnRate: number;
+};
 
 class Tile {
   private pressTimeout: NodeJS.Timeout | null = null;

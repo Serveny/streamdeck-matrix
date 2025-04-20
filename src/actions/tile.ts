@@ -1,21 +1,17 @@
-import {
+import streamDeck, {
   action,
   DidReceiveSettingsEvent,
   KeyAction,
   KeyDownEvent,
+  PropertyInspectorDidAppearEvent,
   SingletonAction,
   WillAppearEvent,
   WillDisappearEvent,
 } from '@elgato/streamdeck';
-import { Matrix } from '../matrix';
-
-type Settings = {
-  animationSpeed: number;
-  animationSpawnRate: number;
-};
+import { Matrix, MatrixSettings } from '../matrix';
 
 @action({ UUID: 'dude.serveny.streamdeck-matrix.tile' })
-export class MatrixTile extends SingletonAction<Settings> {
+export class MatrixTile extends SingletonAction<MatrixSettings> {
   matrix = new Matrix();
 
   override onWillAppear(ev: WillAppearEvent): void | Promise<void> {
@@ -36,10 +32,17 @@ export class MatrixTile extends SingletonAction<Settings> {
   }
 
   override async onDidReceiveSettings(
-    ev: DidReceiveSettingsEvent<Settings>
+    ev: DidReceiveSettingsEvent<MatrixSettings>
   ): Promise<void> {
-    const { animationSpeed, animationSpawnRate } = ev.payload.settings;
-    this.matrix.animation.setSpeed(animationSpeed);
-    this.matrix.animation.setSpawnRate(animationSpawnRate);
+    streamDeck.settings.setGlobalSettings(ev.payload.settings);
+    this.matrix.updateSettings(ev.payload.settings);
+  }
+
+  override async onPropertyInspectorDidAppear(
+    ev: PropertyInspectorDidAppearEvent<MatrixSettings>
+  ): Promise<void> {
+    const settings =
+      await streamDeck.settings.getGlobalSettings<MatrixSettings>();
+    ev.action.setSettings(settings);
   }
 }
