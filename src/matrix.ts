@@ -2,6 +2,7 @@ import { KeyAction } from '@elgato/streamdeck';
 import { Tile } from './matrix/tile';
 import { MatrixGame } from './matrix/game';
 import { MatrixAnimation } from './matrix/animation';
+import { createColorImage } from './image';
 
 export class Matrix {
   // x/y or col/row
@@ -50,10 +51,12 @@ export class Matrix {
   updateSettings(settings: MatrixSettings) {
     this.animation.setSpeed(settings.animationSpeed);
     this.animation.setSpawnRate(settings.animationSpawnRate);
+    Tile.activeImage = createColorImage(settings.tileColor);
   }
 }
 
 export type MatrixSettings = {
   animationSpeed: number;
   animationSpawnRate: number;
+  tileColor: string;
 };

@@ -1,4 +1,5 @@
-import { randomIntBetween, rndBool } from '../utils';
+import { ColorImage } from '../image';
+import { randomIntBetween, rndBool } from '../random';
 import { MatrixGame } from './game';
 import { Tile } from './tile';
 
@@ -76,8 +77,6 @@ export class MatrixAnimation {
   }
 }
 
-type Color = 'black' | 'green';
-
 class MatrixColumnAnimation {
   private nextRowI = 0;
   constructor(private col: (Tile | null)[]) {
@@ -88,7 +87,7 @@ class MatrixColumnAnimation {
   async animateNext(): Promise<boolean> {
     if (this.nextRowI > 0) await this.clear();
     if (this.nextRowI < this.col.length)
-      await this.setTileColor(this.nextRowI, 'green');
+      await this.setTileColor(this.nextRowI, Tile.activeImage);
     return !(this.nextRowI++ < this.col.length);
   }
 
@@ -97,10 +96,13 @@ class MatrixColumnAnimation {
   }
 
   async clear(): Promise<void> {
-    await this.setTileColor(this.nextRowI - 1, 'black');
+    await this.setTileColor(this.nextRowI - 1, Tile.backgroundImage);
   }
 
-  private setTileColor(rowI: number, color: Color): Promise<void> | undefined {
-    return this.col[rowI]?.action.setImage(`imgs/actions/tile/${color}`);
+  private setTileColor(
+    rowI: number,
+    colorImage: ColorImage
+  ): Promise<void> | undefined {
+    return this.col[rowI]?.action.setImage(colorImage);
   }
 }
