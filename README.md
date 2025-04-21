@@ -6,7 +6,7 @@ A Streamdeck plugin for a matrix code rain inspired animation with a little mini
   <img src="assets/demo.gif" alt="Menu demo animation" height="300px">
 </p>
 
-## Featurers
+## Features
 
 - [x] 🗽 Freely arrangeable tiles
 - [x] 🎨 Configurable tile color
@@ -26,7 +26,7 @@ _For example, between a shutdown menu:_
 
 <table>
   <tr><th>Name</th><th>Description</th></tr>
+  <tr><td>Color</td><td>The color of the tiles</td></tr>
   <tr><td>Speed</td><td>The animation speed. Controls how quickly the tiles move from top to bottom and new cells are spawned</td></tr>
   <tr><td>Spawn Rate</td><td>The probability that a new rain drowp is spawned per animation step</td></tr>
-  <tr><td>Color</td><td>The color of the tiles</td></tr>
 </table>
