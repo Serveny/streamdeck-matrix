@@ -15,6 +15,7 @@
 			"States": [
 				{
 					"Image": "imgs/actions/tile/black",
+					"FontSize": 32,
 					"TitleAlignment": "middle"
 				}
 			]

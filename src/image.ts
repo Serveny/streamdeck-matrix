@@ -6,5 +6,5 @@ export function createColorImage(colorHex: string, width = 72, height = 72) {
 }
 
 function toBase64Image(svgString: string): string {
-  return `data:image/svg+xml;base64,${btoa(svgString)}`;
+  return `data:image/svg+xml,${encodeURIComponent(svgString)}`;
 }
