@@ -1,4 +1,4 @@
-<h1 style="font-size: 32px;"><img src="dude.serveny.streamdeck-matrix.sdPlugin/imgs/plugin/category-icon.png" alt="Logo" width="32" height="32" style="margin-bottom: -6px;"> Streamdeck Matrix Plugin</h1>
+<h1 style="font-size: 32px;"><img src="dude.serveny.tile-rain-matrix.sdPlugin/imgs/plugin/category-icon.png" alt="Logo" width="32" height="32" style="margin-bottom: -6px;"> Streamdeck Tile Rain Matrix Plugin</h1>
 
 A Streamdeck plugin for a matrix code rain inspired animation with a little mini game. Tap the green tile before they reach the ground to count up a highscore.
 

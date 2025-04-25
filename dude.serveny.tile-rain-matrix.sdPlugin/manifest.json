@@ -1,11 +1,11 @@
 {
-	"Name": "Streamdeck-Matrix",
-	"Version": "0.1.0.0",
+	"Name": "Tile Rain Matrix",
+	"Version": "1.0.0.0",
 	"Author": "Serveny",
 	"Actions": [
 		{
 			"Name": "Tile",
-			"UUID": "dude.serveny.streamdeck-matrix.tile",
+			"UUID": "dude.serveny.tile-rain-matrix.tile",
 			"Icon": "imgs/actions/tile/icon",
 			"Tooltip": "Displays a matrix tile",
 			"PropertyInspectorPath": "ui/matrix-settings.html",
@@ -21,10 +21,10 @@
 			]
 		}
 	],
-	"Category": "Streamdeck-Matrix",
+	"Category": "Tile Rain Matrix",
 	"CategoryIcon": "imgs/plugin/category-icon",
 	"CodePath": "bin/plugin.js",
-	"Description": "Interactive matrix animation",
+	"Description": "Interactive tile rain matrix animation",
 	"Icon": "imgs/plugin/marketplace",
 	"SDKVersion": 2,
 	"Software": {
@@ -52,5 +52,5 @@
 			"DontAutoSwitchWhenInstalled": false
 		}
 	],
-	"UUID": "dude.serveny.streamdeck-matrix"
+	"UUID": "dude.serveny.tile-rain-matrix"
 }

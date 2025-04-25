@@ -8,7 +8,7 @@ import streamDeck, {
 } from '@elgato/streamdeck';
 import { Matrix, MatrixSettings } from '../matrix';
 
-@action({ UUID: 'dude.serveny.streamdeck-matrix.tile' })
+@action({ UUID: 'dude.serveny.tile-rain-matrix.tile' })
 export class MatrixTile extends SingletonAction<MatrixSettings> {
   matrix = new Matrix();
 

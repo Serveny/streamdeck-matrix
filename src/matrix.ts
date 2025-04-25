@@ -56,7 +56,7 @@ export class Matrix {
 }
 
 export type MatrixSettings = {
-  animationSpeed: number;
-  animationSpawnRate: number;
-  tileColor: string;
+  animationSpeed?: number;
+  animationSpawnRate?: number;
+  tileColor?: string;
 };

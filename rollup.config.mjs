@@ -6,7 +6,7 @@ import path from 'node:path';
 import url from 'node:url';
 
 const isWatching = !!process.env.ROLLUP_WATCH;
-const sdPlugin = 'dude.serveny.streamdeck-matrix.sdPlugin';
+const sdPlugin = 'dude.serveny.tile-rain-matrix.sdPlugin';
 
 /**
  * @type {import('rollup').RollupOptions}
