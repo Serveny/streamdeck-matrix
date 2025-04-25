@@ -11,6 +11,7 @@ A Streamdeck plugin for a matrix code rain inspired animation with a little mini
 - [x] 🗽 Freely arrangeable tiles
 - [x] 🎨 Configurable tile color
 - [x] ⛷️ Configurable animation
+- [x] 🎮️ Little counter clicker game
 
 ## How to use
 
