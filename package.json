@@ -3,7 +3,7 @@
         "build": "rollup -c",
         "watch": "rollup -c -w --watch.onEnd=\"streamdeck restart dude.serveny.tile-rain-matrix\"",
         "restart": "streamdeck restart dude.serveny.tile-rain-matrix.increment",
-        "pack": "streamdeck pack dude.serveny.tile-rain-matrix.sdPlugin -o=./dist/ -f"
+        "pack": "streamdeck pack dude.serveny.tile-rain-matrix.sdPlugin -o ./dist/ -f"
     },
     "type": "module",
     "devDependencies": {
