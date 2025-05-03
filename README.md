@@ -5,6 +5,9 @@ A Streamdeck plugin for a matrix code rain inspired animation with a little mini
 <p align="center">
   <img src="assets/demo.gif" alt="Menu demo animation" height="300px">
 </p>
+<p align="center">
+  <a href="https://marketplace.elgato.com/product/streamdeck-matrix-9f52e5d1-f305-4206-8973-d503eeac6d80" style="display: inline-block; padding: 10px 20px; background-color: blue; color: white; text-decoration: none; border-radius: 5px;">Download from Elgato Marketplace</a>
+</p>
 
 ## Features
 
