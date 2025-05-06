@@ -3,13 +3,19 @@ import { Tile } from './matrix/tile';
 import { MatrixGame } from './matrix/game';
 import { MatrixAnimation } from './matrix/animation';
 import { createColorImage } from './image';
+import { MatrixSpeed } from './matrix/speed';
 
 export class Matrix {
   // x/y or col/row
   private tiles: (Tile | null)[][] = [];
-
-  private game = new MatrixGame();
-  public animation = new MatrixAnimation(this.tiles, this.game, 0.9);
+  private speed = new MatrixSpeed();
+  private game = new MatrixGame(this.speed);
+  public animation = new MatrixAnimation(
+    this.tiles,
+    () => this.game.reset(),
+    this.speed,
+    0.9
+  );
 
   addTile(rowI: number, colI: number, action: KeyAction) {
     const lastColI = this.tiles.length - 1;
@@ -52,6 +58,7 @@ export class Matrix {
     this.animation.setSpeed(settings.animationSpeed);
     this.animation.setSpawnRate(settings.animationSpawnRate);
     Tile.activeImage = createColorImage(settings.tileColor);
+    this.speed.setComboDifficulty(settings.comboDifficulty);
   }
 }
 

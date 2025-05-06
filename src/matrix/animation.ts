@@ -1,16 +1,16 @@
 import { ColorImage } from '../image';
 import { randomIntBetween, rndBool } from '../random';
-import { MatrixGame } from './game';
+import { MatrixSpeed } from './speed';
 import { Tile } from './tile';
 
 export class MatrixAnimation {
-  private waitTimeMs: number = 300;
   private timeout: NodeJS.Timeout | null = null;
   private animatedCols: (MatrixColumnAnimation | null)[] = [];
 
   constructor(
     private tiles: (Tile | null)[][],
-    private game: MatrixGame,
+    private resetGame: () => void,
+    private speed: MatrixSpeed,
     public spawnRate: number = 1.0
   ) {}
 
@@ -37,7 +37,7 @@ export class MatrixAnimation {
   setSpeed(speed: number = 0.8): void {
     this.stop();
     if (speed === 0) return;
-    this.waitTimeMs = Math.floor(1000 * (1.05 - speed));
+    this.speed.setSpeed(speed);
     this.animateFrame();
   }
 
@@ -55,7 +55,10 @@ export class MatrixAnimation {
   private async animateFrame(): Promise<void> {
     this.chooseNextColAnimation();
     await this.animateCurrentCols();
-    this.timeout = setTimeout(() => this.animateFrame(), this.waitTimeMs);
+    this.timeout = setTimeout(
+      () => this.animateFrame(),
+      this.speed.actualWaitTimeMs
+    );
   }
 
   private chooseNextColAnimation() {
@@ -74,7 +77,7 @@ export class MatrixAnimation {
         (await this.animatedCols[i]?.animateNext())
       ) {
         this.animatedCols[i] = null;
-        this.game.reset();
+        this.resetGame();
       }
   }
 }

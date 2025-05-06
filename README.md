@@ -15,6 +15,7 @@ A Streamdeck plugin for a matrix code rain inspired animation with a little mini
 - [x] 🎨 Configurable tile color
 - [x] ⛷️ Configurable animation
 - [x] 🎮️ Little counter clicker game
+- [x] 🎮️ Configurable combo difficulty (The game gets faster with higher counter)
 
 ## How to use
 
@@ -33,4 +34,5 @@ _For example, between a shutdown menu:_
   <tr><td>Color</td><td>The color of the tiles</td></tr>
   <tr><td>Speed</td><td>The animation speed. Controls how quickly the tiles move from top to bottom and new cells are spawned</td></tr>
   <tr><td>Spawn Rate</td><td>The probability that a new rain drowp is spawned per animation step</td></tr>
+  <tr><td>Combo Increasing Difficulty</td><td>How fast the counter increases the speed of the tiles</td></tr>
 </table>

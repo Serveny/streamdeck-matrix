@@ -1,16 +1,17 @@
+import { MatrixSpeed } from './speed';
+
 export class MatrixGame {
   private counter = 0;
-  private comboDifficulty = 1;
+
+  constructor(private speed: MatrixSpeed) {}
 
   public up(): number {
-    return ++this.counter;
+    this.speed.setLevel(++this.counter);
+    return this.counter;
   }
 
   public reset(): void {
+    if (this.counter !== 0) this.speed.setLevel(0);
     this.counter = 0;
-  }
-
-  public setDifficulty(difficulty: number = 1): void {
-    this.comboDifficulty = difficulty;
   }
 }
