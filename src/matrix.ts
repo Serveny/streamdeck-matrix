@@ -31,7 +31,7 @@ export class Matrix {
     return this.tiles[colI][rowI];
   }
 
-  onTilePressed(rowI: number, colI: number) {
+  onTilePressed(rowI: number, colI: number): void {
     const tile = this.getTile(rowI, colI);
     if (tile == null) return;
     if (this.animation.isTileActive(rowI, colI)) {
@@ -40,15 +40,15 @@ export class Matrix {
     }
   }
 
-  removeTile(rowI: number, colI: number) {
+  removeTile(rowI: number, colI: number): void {
     this.tiles[rowI][colI] = null;
   }
 
-  isEmpty() {
+  isEmpty(): boolean {
     return !this.tiles.some((col) => col.some((item) => item != null));
   }
 
-  updateSettings(settings: MatrixSettings) {
+  updateSettings(settings: MatrixSettings): void {
     this.animation.setSpeed(settings.animationSpeed);
     this.animation.setSpawnRate(settings.animationSpawnRate);
     Tile.activeImage = createColorImage(settings.tileColor);
@@ -59,4 +59,5 @@ export type MatrixSettings = {
   animationSpeed?: number;
   animationSpawnRate?: number;
   tileColor?: string;
+  comboDifficulty?: number;
 };

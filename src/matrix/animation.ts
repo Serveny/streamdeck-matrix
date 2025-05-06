@@ -7,32 +7,34 @@ export class MatrixAnimation {
   private waitTimeMs: number = 300;
   private timeout: NodeJS.Timeout | null = null;
   private animatedCols: (MatrixColumnAnimation | null)[] = [];
+
   constructor(
     private tiles: (Tile | null)[][],
     private game: MatrixGame,
     public spawnRate: number = 1.0
   ) {}
-  addCol() {
+
+  addCol(): void {
     this.animatedCols.push(null);
   }
 
-  start() {
+  start(): void {
     if (this.timeout == null)
       this.timeout = setTimeout(() => this.animateFrame(), 2000);
   }
 
-  stop() {
+  stop(): void {
     if (this.timeout) {
       clearTimeout(this.timeout);
       this.timeout = null;
     }
   }
 
-  setSpawnRate(spawnRate: number = 1.0) {
+  setSpawnRate(spawnRate: number = 1.0): void {
     this.spawnRate = spawnRate;
   }
 
-  setSpeed(speed: number = 0.8) {
+  setSpeed(speed: number = 0.8): void {
     this.stop();
     if (speed === 0) return;
     this.waitTimeMs = Math.floor(1000 * (1.05 - speed));
@@ -43,14 +45,14 @@ export class MatrixAnimation {
     return this.animatedCols[colI]?.isTileActive(rowI) ?? false;
   }
 
-  clearColAnimation(colI: number) {
+  clearColAnimation(colI: number): void {
     if (colI < this.animatedCols.length) {
       this.animatedCols[colI]?.clear();
       this.animatedCols[colI] = null;
     }
   }
 
-  private async animateFrame() {
+  private async animateFrame(): Promise<void> {
     this.chooseNextColAnimation();
     await this.animateCurrentCols();
     this.timeout = setTimeout(() => this.animateFrame(), this.waitTimeMs);
@@ -65,7 +67,7 @@ export class MatrixAnimation {
     }
   }
 
-  private async animateCurrentCols() {
+  private async animateCurrentCols(): Promise<void> {
     for (let i = 0; i < this.animatedCols.length; i++)
       if (
         this.animatedCols[i] != null &&
