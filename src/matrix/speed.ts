@@ -1,5 +1,3 @@
-import streamDeck from '@elgato/streamdeck';
-
 export class MatrixSpeed {
   private comboDifficulty = 1;
   public actualWaitTimeMs = 300;
@@ -18,7 +16,7 @@ export class MatrixSpeed {
   }
 
   public setLevel(level: number): void {
-    this.comboFactor = 1 - (level * this.comboDifficulty) / 100;
+    this.comboFactor = 1 - Math.sqrt(level * this.comboDifficulty) / 100;
     this.calcActualWaitTime();
   }
 
