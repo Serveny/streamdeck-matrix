@@ -1,3 +1,4 @@
+import streamDeck from '@elgato/streamdeck';
 import { ColorImage } from '../image';
 import { randomIntBetween, rndBool } from '../random';
 import { MatrixSpeed } from './speed';
@@ -30,11 +31,11 @@ export class MatrixAnimation {
     }
   }
 
-  setSpawnRate(spawnRate: number = 1.0): void {
+  setSpawnRate(spawnRate: number = 0.8): void {
     this.spawnRate = spawnRate;
   }
 
-  setSpeed(speed: number = 0.8): void {
+  setSpeed(speed: number = 0.7): void {
     this.stop();
     if (speed === 0) return;
     this.speed.setSpeed(speed);
@@ -61,9 +62,17 @@ export class MatrixAnimation {
     );
   }
 
+  private freeColIndexes(): number[] {
+    const free = [];
+    for (let i = 0; i < this.animatedCols.length; i++)
+      if (this.animatedCols[i] == null) free.push(i);
+    return free;
+  }
+
   private chooseNextColAnimation() {
     if (rndBool(this.spawnRate)) {
-      const rndColI = randomIntBetween(0, this.tiles.length - 1);
+      const colIndexes = this.freeColIndexes();
+      const rndColI = colIndexes[randomIntBetween(0, colIndexes.length - 1)];
       this.animatedCols[rndColI] ??= new MatrixColumnAnimation(
         this.tiles[rndColI]
       );
