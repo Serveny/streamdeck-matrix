@@ -1,4 +1,3 @@
-import streamDeck from '@elgato/streamdeck';
 import { ColorImage } from '../image';
 import { randomIntBetween, rndBool } from '../random';
 import { MatrixSpeed } from './speed';

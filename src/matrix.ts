@@ -2,7 +2,6 @@ import { KeyAction } from '@elgato/streamdeck';
 import { Tile } from './matrix/tile';
 import { MatrixGame } from './matrix/game';
 import { MatrixAnimation } from './matrix/animation';
-import { createColorImage } from './image';
 import { MatrixSpeed } from './matrix/speed';
 
 export class Matrix {
@@ -57,7 +56,7 @@ export class Matrix {
   updateSettings(settings: MatrixSettings): void {
     this.animation.setSpeed(settings.animationSpeed);
     this.animation.setSpawnRate(settings.animationSpawnRate);
-    Tile.activeImage = createColorImage(settings.tileColor);
+    Tile.setActiveColor(settings.tileColor);
     this.speed.setComboDifficulty(settings.comboDifficulty);
   }
 }

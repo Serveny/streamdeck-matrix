@@ -1,10 +1,14 @@
 import { KeyAction } from '@elgato/streamdeck';
 import { ColorImage, createColorImage } from '../image';
+import { RgbColor } from '../color';
 
 export class Tile {
   private pressTimeout: NodeJS.Timeout | null = null;
 
-  static activeImage: ColorImage = createColorImage('#21AE52');
+  static activeColor: RgbColor = RgbColor.fromHex('#21AE52');
+  static activeImage: ColorImage = createColorImage(
+    Tile.activeColor.toRgbString()
+  );
   static backgroundImage: ColorImage = createColorImage('#020204');
   static pressedImage: ColorImage = createColorImage('#8DDE9C');
 
@@ -21,5 +25,10 @@ export class Tile {
     this.pressTimeout = null;
     this.action.setImage(Tile.backgroundImage);
     this.action.setTitle();
+  }
+
+  static setActiveColor(colorHex?: string) {
+    if (colorHex) Tile.activeColor = RgbColor.fromHex(colorHex);
+    Tile.activeImage = createColorImage(Tile.activeColor.toRgbString());
   }
 }
