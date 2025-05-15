@@ -12,3 +12,5 @@ New feature
 ### Added
 
 - MINOR [Add higher difficulty with increasing counter](https://github.com/Serveny/streamdeck-matrix/issues/1)
+- MINOR Change color with increasing counter
+- PATCH Tile was set to black if activated after pressing in a short time range

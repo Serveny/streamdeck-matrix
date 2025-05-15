@@ -15,10 +15,10 @@ export class RgbColor {
 
   public static fromHex(hex: string): RgbColor {
     hex = hex.replace(/^#/, '');
-    let bigint = parseInt(hex, 16);
-    let r = (bigint >> 16) & 255;
-    let g = (bigint >> 8) & 255;
-    let b = bigint & 255;
+    const bigint = parseInt(hex, 16),
+      r = (bigint >> 16) & 255,
+      g = (bigint >> 8) & 255,
+      b = bigint & 255;
 
     return new RgbColor(r, g, b);
   }

@@ -3,7 +3,7 @@ import { ColorImage, createColorImage } from '../image';
 import { RgbColor } from '../color';
 
 export class Tile {
-  private pressTimeout: NodeJS.Timeout | null = null;
+  pressTimeout: NodeJS.Timeout | null = null;
 
   static activeColor: RgbColor = RgbColor.fromHex('#21AE52');
   static activeImage: ColorImage = createColorImage(

@@ -116,6 +116,8 @@ class MatrixColumnAnimation {
     rowI: number,
     colorImage: ColorImage
   ): Promise<void> | undefined {
-    return this.col[rowI]?.action.setImage(colorImage);
+    const tile = this.col[rowI];
+    if (tile?.pressTimeout != null) clearTimeout(tile.pressTimeout);
+    return tile?.action.setImage(colorImage);
   }
 }
