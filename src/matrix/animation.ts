@@ -109,15 +109,18 @@ class MatrixColumnAnimation {
   }
 
   async clear(): Promise<void> {
-    await this.setTileColor(this.nextRowI - 1, Tile.backgroundImage);
+    return this.setTileColor(this.nextRowI - 1, Tile.backgroundImage);
   }
 
-  private setTileColor(
+  private async setTileColor(
     rowI: number,
     colorImage: ColorImage
-  ): Promise<void> | undefined {
+  ): Promise<void> {
     const tile = this.col[rowI];
-    if (tile?.pressTimeout != null) clearTimeout(tile.pressTimeout);
+    if (tile?.pressTimeout != null) {
+      clearTimeout(tile.pressTimeout);
+      await tile.action.setTitle();
+    }
     return tile?.action.setImage(colorImage);
   }
 }

@@ -21,10 +21,10 @@ export class Tile {
     this.pressTimeout = setTimeout(() => this.clearPressAnimation(), 300);
   }
 
-  private clearPressAnimation() {
+  private async clearPressAnimation(): Promise<void> {
     this.pressTimeout = null;
-    this.action.setImage(Tile.backgroundImage);
-    this.action.setTitle();
+    await this.action.setImage(Tile.backgroundImage);
+    return this.action.setTitle();
   }
 
   static setActiveColor(colorHex?: string) {
