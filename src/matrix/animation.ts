@@ -20,7 +20,7 @@ export class MatrixAnimation {
 
   start(): void {
     if (this.timeout == null)
-      this.timeout = setTimeout(() => this.animateFrame(), 2000);
+      this.timeout = setTimeout(() => this.animateFrame(), 600);
   }
 
   stop(): void {
