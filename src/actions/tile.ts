@@ -7,6 +7,7 @@ import streamDeck, {
   WillDisappearEvent,
 } from '@elgato/streamdeck';
 import { Matrix, MatrixSettings } from '../matrix';
+import { Tile } from '../matrix/tile';
 
 @action({ UUID: 'dude.serveny.tile-rain-matrix.tile' })
 export class MatrixTile extends SingletonAction<MatrixSettings> {
@@ -22,6 +23,7 @@ export class MatrixTile extends SingletonAction<MatrixSettings> {
 
   override onWillAppear(ev: WillAppearEvent): void | Promise<void> {
     const { row, column } = (ev.payload as any).coordinates;
+    ev.action.setImage(Tile.backgroundImage);
     this.matrix.addTile(row, column, ev.action as KeyAction);
     this.matrix.animation.start();
   }
