@@ -6,7 +6,7 @@ import { MatrixSpeed } from './matrix/speed';
 
 export class Matrix {
   // x/y or col/row
-  private tiles: (Tile | null)[][] = [];
+  tiles: (Tile | null)[][] = [];
   private speed = new MatrixSpeed();
   private game = new MatrixGame(this.speed);
   public animation = new MatrixAnimation(
@@ -46,7 +46,7 @@ export class Matrix {
   }
 
   removeTile(rowI: number, colI: number): void {
-    this.tiles[rowI][colI] = null;
+    this.tiles[colI][rowI] = null;
   }
 
   isEmpty(): boolean {
