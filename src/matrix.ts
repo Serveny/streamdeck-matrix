@@ -6,7 +6,7 @@ import { MatrixSpeed } from './matrix/speed';
 
 export class Matrix {
   // x/y or col/row
-  tiles: (Tile | null)[][] = [];
+  private tiles: (Tile | null)[][] = [];
   private speed = new MatrixSpeed();
   private game = new MatrixGame(this.speed);
   public animation = new MatrixAnimation(
