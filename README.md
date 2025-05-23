@@ -32,7 +32,7 @@ _For example, between a shutdown menu:_
 <table>
   <tr><th>Name</th><th>Description</th></tr>
   <tr><td>Color</td><td>The color of the tiles</td></tr>
-  <tr><td>Speed</td><td>The animation speed. Controls how quickly the tiles move from top to bottom and new cells are spawned</td></tr>
+  <tr><td>Speed</td><td>The animation speed. Controls how quickly the tiles move from top to bottom and new cells are spawned (range from 0 to 10 FPS)</td></tr>
   <tr><td>Spawn Rate</td><td>The probability that a new rain drowp is spawned per animation step</td></tr>
   <tr><td>Combo Increasing Difficulty</td><td>How fast the counter increases the speed of the tiles</td></tr>
 </table>
