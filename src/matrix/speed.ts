@@ -7,7 +7,7 @@ export class MatrixSpeed {
 
   public setSpeed(speed: number): void {
     if (speed === 0) return;
-    this.waitTimeMs = Math.floor(1000 * (1.1 - speed));
+    this.waitTimeMs = Math.floor(100 / speed);
     this.calcActualWaitTime();
   }
 

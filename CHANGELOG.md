@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - PATCH Tile title was not resetted if activated after pressing in a short time range
 - PATCH Animation loop was not stopping after all tiles disappeared
 - PATCH Active tile was not resetted at profile switch
+- PATCH Improved speed settings system
 
 ## [1.1.0.0] - 2025-05-16
 

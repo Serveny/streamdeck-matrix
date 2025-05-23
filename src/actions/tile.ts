@@ -11,13 +11,15 @@ import { Tile } from '../matrix/tile';
 
 @action({ UUID: 'dude.serveny.tile-rain-matrix.tile' })
 export class MatrixTile extends SingletonAction<MatrixSettings> {
-  matrix = new Matrix();
+  private matrix = new Matrix();
+  private settings: MatrixSettings = {};
 
   constructor() {
     super();
-    streamDeck.settings.onDidReceiveGlobalSettings((ev) =>
-      this.matrix.updateSettings(ev.settings as MatrixSettings)
-    );
+    streamDeck.settings.onDidReceiveGlobalSettings((ev) => {
+      this.settings = ev.settings;
+      this.matrix.updateSettings(this.settings);
+    });
     streamDeck.settings.getGlobalSettings();
   }
 
@@ -25,7 +27,7 @@ export class MatrixTile extends SingletonAction<MatrixSettings> {
     const { row, column } = (ev.payload as any).coordinates;
     ev.action.setImage(Tile.backgroundImage);
     this.matrix.addTile(row, column, ev.action as KeyAction);
-    this.matrix.animation.start();
+    if (this.settings.animationSpeed !== 0) this.matrix.animation.start();
   }
 
   override onWillDisappear(ev: WillDisappearEvent): Promise<void> | void {
