@@ -7,24 +7,23 @@ import { Tile } from "./matrix/tile";
 
 export class Matrix {
 	public animation: MatrixAnimation;
+
+	private colsWithTiles: Set<number> = new Set();
 	private game: MatrixGame;
 	private speed = new MatrixSpeed();
 	// x/y or col/row
 	private tiles: (Tile | null)[][] = [];
 
 	constructor() {
-		this.animation = new MatrixAnimation(this.tiles, () => this.game.reset(), this.speed, 0.9);
+		this.animation = new MatrixAnimation(this.tiles, this.colsWithTiles, () => this.game.reset(), this.speed, 0.9);
 		this.game = new MatrixGame(this.speed);
 	}
 
 	public addTile(rowI: number, colI: number, action: KeyAction): void {
 		const lastColI = this.tiles.length - 1;
 		// Fill rows
-		if (colI > lastColI)
-			for (let i = lastColI; i < colI; i++) {
-				this.tiles.push([]);
-				this.animation.addCol();
-			}
+		if (colI > lastColI) for (let i = lastColI; i < colI; i++) this.tiles.push([]);
+		this.colsWithTiles.add(colI);
 		const col = this.tiles[colI];
 
 		const lastRowI = col.length - 1;
@@ -51,6 +50,7 @@ export class Matrix {
 
 	public removeTile(rowI: number, colI: number): void {
 		this.tiles[colI][rowI] = null;
+		if (!this.tiles[colI].some((col) => col != null)) this.colsWithTiles.delete(colI);
 	}
 
 	public updateSettings(settings: MatrixSettings): void {

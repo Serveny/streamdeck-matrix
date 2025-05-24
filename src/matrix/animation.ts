@@ -4,24 +4,21 @@ import { MatrixSpeed } from "./speed";
 import { Tile } from "./tile";
 
 export class MatrixAnimation {
-	private animatedCols: (MatrixColumnAnimation | null)[] = [];
+	private animatedCols: MatrixColumnAnimation[] = [];
 	private timeout: NodeJS.Timeout | null = null;
 
 	constructor(
 		private tiles: (Tile | null)[][],
+		private colsWithTiles: Set<number>,
 		private resetGame: () => void,
 		private speed: MatrixSpeed,
 		public spawnRate: number = 1.0,
 	) {}
 
-	public addCol(): void {
-		this.animatedCols.push(null);
-	}
-
 	public clearColAnimation(colI: number): void {
 		if (colI < this.animatedCols.length) {
 			this.animatedCols[colI]?.clear();
-			this.animatedCols[colI] = null;
+			delete this.animatedCols[colI];
 		}
 	}
 
@@ -54,7 +51,7 @@ export class MatrixAnimation {
 	private async animateCurrentCols(): Promise<void> {
 		for (let i = 0; i < this.animatedCols.length; i++)
 			if (this.animatedCols[i] != null && (await this.animatedCols[i]?.animateNext())) {
-				this.animatedCols[i] = null;
+				delete this.animatedCols[i];
 				this.resetGame();
 			}
 	}
@@ -74,9 +71,7 @@ export class MatrixAnimation {
 	}
 
 	private freeColIndexes(): number[] {
-		const free = [];
-		for (let i = 0; i < this.animatedCols.length; i++) if (this.animatedCols[i] == null) free.push(i);
-		return free;
+		return [...this.colsWithTiles.keys()].filter((colI) => this.animatedCols[colI] == null);
 	}
 }
 
