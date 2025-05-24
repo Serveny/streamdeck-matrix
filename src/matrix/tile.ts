@@ -1,7 +1,7 @@
 import { KeyAction } from "@elgato/streamdeck";
 
-import { RgbColor } from "../color";
-import { ColorImage, createColorImage } from "../image";
+import { RgbColor } from "../utils/color";
+import { ColorImage, createColorImage } from "../utils/image";
 
 export class Tile {
 	public static activeColor: RgbColor = RgbColor.fromHex("#21AE52");

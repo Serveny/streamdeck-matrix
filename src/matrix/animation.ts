@@ -1,5 +1,5 @@
-import { ColorImage } from "../image";
-import { randomIntBetween, rndBool } from "../random";
+import { ColorImage } from "../utils/image";
+import { randomIntBetween, rndBool } from "../utils/random";
 import { MatrixSpeed } from "./speed";
 import { Tile } from "./tile";
 

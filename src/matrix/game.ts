@@ -1,4 +1,4 @@
-import { createColorImage } from "../image";
+import { createColorImage } from "../utils/image";
 import { MatrixSpeed } from "./speed";
 import { Tile } from "./tile";
 
