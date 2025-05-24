@@ -1,55 +1,55 @@
 {
-    "Name": "Tile Rain Matrix",
-    "Version": "1.1.0.0",
-    "Author": "Serveny",
-    "Actions": [
-        {
-            "Name": "Tile",
-            "UUID": "dude.serveny.tile-rain-matrix.tile",
-            "Icon": "imgs/actions/tile/icon",
-            "Tooltip": "Displays a matrix tile",
-            "PropertyInspectorPath": "ui/matrix-settings.html",
-            "Controllers": [
-                "Keypad"
-            ],
-            "States": [
-                {
-                    "Image": "imgs/actions/tile/black",
-                    "FontSize": 32,
-                    "TitleAlignment": "middle"
-                }
-            ]
-        }
-    ],
-    "Category": "Tile Rain Matrix",
-    "CategoryIcon": "imgs/plugin/category-icon",
-    "CodePath": "bin/plugin.js",
-    "Description": "Interactive tile rain matrix animation",
-    "Icon": "imgs/plugin/marketplace",
-    "SDKVersion": 2,
-    "Software": {
-        "MinimumVersion": "6.4"
-    },
-    "OS": [
-        {
-            "Platform": "mac",
-            "MinimumVersion": "12"
-        },
-        {
-            "Platform": "windows",
-            "MinimumVersion": "10"
-        }
-    ],
-    "Nodejs": {
-        "Version": "20"
-    },
-    "Profiles": [
-        {
-            "Name": "profiles/TileRainMatrix",
-            "DeviceType": 0,
-            "Readonly": false,
-            "DontAutoSwitchWhenInstalled": false
-        }
-    ],
-    "UUID": "dude.serveny.tile-rain-matrix"
+	"Name": "Tile Rain Matrix",
+	"Version": "1.1.1.0",
+	"Author": "Serveny",
+	"Actions": [
+		{
+			"Name": "Tile",
+			"UUID": "dude.serveny.tile-rain-matrix.tile",
+			"Icon": "imgs/actions/tile/icon",
+			"Tooltip": "Displays a matrix tile",
+			"PropertyInspectorPath": "ui/matrix-settings.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "imgs/actions/tile/black",
+					"FontSize": 32,
+					"TitleAlignment": "middle"
+				}
+			]
+		}
+	],
+	"Category": "Tile Rain Matrix",
+	"CategoryIcon": "imgs/plugin/category-icon",
+	"CodePath": "bin/plugin.js",
+	"Description": "Interactive tile rain matrix animation",
+	"Icon": "imgs/plugin/marketplace",
+	"SDKVersion": 2,
+	"Software": {
+		"MinimumVersion": "6.4"
+	},
+	"OS": [
+		{
+			"Platform": "mac",
+			"MinimumVersion": "12"
+		},
+		{
+			"Platform": "windows",
+			"MinimumVersion": "10"
+		}
+	],
+	"Nodejs": {
+		"Version": "20"
+	},
+	"Profiles": [
+		{
+			"Name": "profiles/TileRainMatrix",
+			"DeviceType": 0,
+			"Readonly": false,
+			"DontAutoSwitchWhenInstalled": false
+		}
+	],
+	"UUID": "dude.serveny.tile-rain-matrix"
 }
