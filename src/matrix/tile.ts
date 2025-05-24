@@ -1,34 +1,42 @@
-import { KeyAction } from '@elgato/streamdeck';
-import { ColorImage, createColorImage } from '../image';
-import { RgbColor } from '../color';
+import { KeyAction } from "@elgato/streamdeck";
+
+import { RgbColor } from "../color";
+import { ColorImage, createColorImage } from "../image";
 
 export class Tile {
-  pressTimeout: NodeJS.Timeout | null = null;
+	public static activeColor: RgbColor = RgbColor.fromHex("#21AE52");
+	public static activeImage: ColorImage = createColorImage(Tile.activeColor.toRgbString());
+	public static backgroundImage: ColorImage = createColorImage("#020204");
+	public static pressedImage: ColorImage = createColorImage("#8DDE9C");
 
-  static activeColor: RgbColor = RgbColor.fromHex('#21AE52');
-  static activeImage: ColorImage = createColorImage(
-    Tile.activeColor.toRgbString()
-  );
-  static backgroundImage: ColorImage = createColorImage('#020204');
-  static pressedImage: ColorImage = createColorImage('#8DDE9C');
+	private pressTimeout: NodeJS.Timeout | null = null;
 
-  constructor(public action: KeyAction) {}
+	constructor(public action: KeyAction) {}
 
-  showPressAnimation(text?: string) {
-    this.action.setImage(Tile.pressedImage);
-    if (text) this.action.setTitle(text);
-    if (this.pressTimeout) clearTimeout(this.pressTimeout);
-    this.pressTimeout = setTimeout(() => this.clearPressAnimation(), 300);
-  }
+	public static setActiveColor(colorHex?: string): void {
+		if (colorHex) Tile.activeColor = RgbColor.fromHex(colorHex);
+		Tile.activeImage = createColorImage(Tile.activeColor.toRgbString());
+	}
 
-  private async clearPressAnimation(): Promise<void> {
-    this.pressTimeout = null;
-    await this.action.setImage(Tile.backgroundImage);
-    return this.action.setTitle();
-  }
+	public async clear(): Promise<void> {
+		if (this.pressTimeout) clearTimeout(this.pressTimeout);
+		this.pressTimeout = null;
+		return this.action.setTitle();
+	}
 
-  static setActiveColor(colorHex?: string) {
-    if (colorHex) Tile.activeColor = RgbColor.fromHex(colorHex);
-    Tile.activeImage = createColorImage(Tile.activeColor.toRgbString());
-  }
+	public isPressed(): boolean {
+		return this.pressTimeout != null;
+	}
+
+	public showPressAnimation(text?: string): void {
+		this.action.setImage(Tile.pressedImage);
+		if (text) this.action.setTitle(text);
+		if (this.pressTimeout) clearTimeout(this.pressTimeout);
+		this.pressTimeout = setTimeout(() => this.clearPressAnimation(), 300);
+	}
+
+	private async clearPressAnimation(): Promise<void> {
+		await this.clear();
+		return this.action.setImage(Tile.backgroundImage);
+	}
 }
