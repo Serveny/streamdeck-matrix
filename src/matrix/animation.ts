@@ -4,7 +4,7 @@ import { MatrixSpeed } from "./speed";
 import { Tile } from "./tile";
 
 export class MatrixAnimation {
-	private animatedCols: MatrixColumnAnimation[] = [];
+	private animatedCols: (MatrixColumnAnimation | null)[] = [];
 	private timeout: NodeJS.Timeout | null = null;
 
 	constructor(
@@ -15,10 +15,14 @@ export class MatrixAnimation {
 		public spawnRate: number = 1.0,
 	) {}
 
+	public addCol(): void {
+		this.animatedCols.push(null);
+	}
+
 	public clearColAnimation(colI: number): void {
 		if (colI < this.animatedCols.length) {
 			this.animatedCols[colI]?.clear();
-			delete this.animatedCols[colI];
+			this.animatedCols[colI] = null;
 		}
 	}
 
@@ -51,7 +55,7 @@ export class MatrixAnimation {
 	private async animateCurrentCols(): Promise<void> {
 		for (let i = 0; i < this.animatedCols.length; i++)
 			if (this.animatedCols[i] != null && (await this.animatedCols[i]?.animateNext())) {
-				delete this.animatedCols[i];
+				this.animatedCols[i] = null;
 				this.resetGame();
 			}
 	}
@@ -64,13 +68,13 @@ export class MatrixAnimation {
 
 	private chooseNextColAnimation(): void {
 		if (rndBool(this.spawnRate)) {
-			const colIndexes = this.freeColIndexes();
+			const colIndexes = this.getFreeColIndices();
 			const rndColI = colIndexes[randomIntBetween(0, colIndexes.length - 1)];
 			this.animatedCols[rndColI] ??= new MatrixColumnAnimation(this.tiles[rndColI]);
 		}
 	}
 
-	private freeColIndexes(): number[] {
+	private getFreeColIndices(): number[] {
 		return [...this.colsWithTiles.keys()].filter((colI) => this.animatedCols[colI] == null);
 	}
 }

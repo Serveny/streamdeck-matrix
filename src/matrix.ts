@@ -22,7 +22,11 @@ export class Matrix {
 	public addTile(rowI: number, colI: number, action: KeyAction): void {
 		const lastColI = this.tiles.length - 1;
 		// Fill rows
-		if (colI > lastColI) for (let i = lastColI; i < colI; i++) this.tiles.push([]);
+		if (colI > lastColI)
+			for (let i = lastColI; i < colI; i++) {
+				this.tiles.push([]);
+				this.animation.addCol();
+			}
 		this.colsWithTiles.add(colI);
 		const col = this.tiles[colI];
 
@@ -50,7 +54,10 @@ export class Matrix {
 
 	public removeTile(rowI: number, colI: number): void {
 		this.tiles[colI][rowI] = null;
-		if (!this.tiles[colI].some((col) => col != null)) this.colsWithTiles.delete(colI);
+		if (!this.tiles[colI].some((col) => col != null)) {
+			this.colsWithTiles.delete(colI);
+			this.animation.clearColAnimation(colI);
+		}
 	}
 
 	public updateSettings(settings: MatrixSettings): void {
