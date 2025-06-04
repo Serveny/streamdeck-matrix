@@ -1,5 +1,5 @@
 import { ColorImage } from "../utils/image";
-import { randomIntBetween, rndBool } from "../utils/random";
+import { randomInt, rndBool } from "../utils/random";
 import { MatrixSpeed } from "./speed";
 import { Tile } from "./tile";
 
@@ -69,7 +69,7 @@ export class MatrixAnimation {
 	private chooseNextColAnimation(): void {
 		if (rndBool(this.spawnRate)) {
 			const colIndexes = this.getFreeColIndices();
-			const rndColI = colIndexes[randomIntBetween(0, colIndexes.length - 1)];
+			const rndColI = colIndexes[randomInt(colIndexes.length)];
 			this.animatedCols[rndColI] ??= new MatrixColumnAnimation(this.tiles[rndColI]);
 		}
 	}
