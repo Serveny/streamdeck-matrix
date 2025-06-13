@@ -5,9 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [unreleased] -
+## [1.1.2.0] - 2025-06-13
+
+Improvements & Bugfixes
+
+### Changed
 
 - PATCH Counter was resetted if some columns had no tiles
+- PATCH Simpler random function
 
 ## [1.1.1.0] - 2025-05-24
 
